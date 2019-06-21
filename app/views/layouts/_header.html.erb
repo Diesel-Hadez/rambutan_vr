@@ -1,3 +1,6 @@
 <header>
   <h1>RambutanVR Header</h1>
+  <% if logged_in? %>
+    <%= link_to "Log out", logout_path, method: :delete %>
+  <% end %>
 </header>
