@@ -1,0 +1,13 @@
+<% provide(:title, 'Sign up') %>
+<% provide(:submit_text, "Create Account") %>
+<% provide(:submit_url, users_path(@user)) %>
+<h1>Signup page</h1>
+<% if @user.errors.any? %>
+  <p>The form contains <%= pluralize(@user.errors.count, "error") %> </p>
+  <ul>
+    <% @user.errors.full_messages.each do |e| %>
+      <li><%= e %> </li>
+    <% end %>
+  </ul>
+<% end %>
+<%= render 'form' %>
