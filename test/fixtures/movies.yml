@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  genre_id: 1
+  release_date: 2019-06-21
+  minutes: 1
+  description: MyText
+
+two:
+  name: MyString
+  genre_id: 2
+  release_date: 2019-06-21
+  minutes: 1
+  description: MyText

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  in_store: false
+  borrow_date: 2019-06-21
+
+two:
+  type: 
+  in_store: false
+  borrow_date: 2019-06-21
