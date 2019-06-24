@@ -1,27 +1,43 @@
+<div class="container">
+  <h1 class="text-center"> <%= yield(:form_title)%> </h1>
 <%= form_for(@user, url: yield(:submit_url)) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <div class="form-group">
+  <%= f.label :name, class: 'form-text' %>
+  <%= f.text_field :name, class: 'form-control' %>
+  </div>
 
-  <%= f.label :dob %>
-  <%= f.date_field :dob %>
+  <div class="form-group">
+  <%= f.label :dob, class: 'form-text' %>
+  <%= f.date_field :dob, class: 'form-control' %>
+  </div>
 
-  <%= f.label :address %>
-  <%= f.text_area :address%>
+  <div class="form-group">
+  <%= f.label :address, class: 'form-text' %>
+  <%= f.text_area :address, class: 'form-control' %>
+  </div>
 
-  <%= f.label :email%>
-  <%= f.email_field :email%>
+  <div class="form-group">
+  <%= f.label :email, class: 'form-text' %>
+  <%= f.email_field :email, class: 'form-control' %>
+  </div>
 
-  <%= f.label :phone_number %>
-  <%= f.telephone_field :phone_number %>
+  <div class="form-group">
+  <%= f.label :phone_number, class: 'form-text' %>
+  <%= f.telephone_field :phone_number, class: 'form-control' %>
+  </div>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+  <div class="form-group">
+  <%= f.label :password, class: 'form-text' %>
+  <%= f.password_field :password, class: 'form-control' %>
+  </div>
 
-  <%= f.label :password_confirmation, "Confirm Password" %>
-  <%= f.password_field :password_confirmation %>
-
+  <div class="form-group">
+  <%= f.label :password_confirmation, "Confirm Password", class: 'form-text' %>
+  <%= f.password_field :password_confirmation, class: 'form-control' %>
+  </div>
   <% #TO-DO: Add admin-check to add new users with admin capabilities %>
 
-  <%= f.submit yield(:submit_text) %>
+  <%= f.submit yield(:submit_text) , class: "btn btn-lg btn-block btn-primary" %>
 
 <% end %>
+</div>
