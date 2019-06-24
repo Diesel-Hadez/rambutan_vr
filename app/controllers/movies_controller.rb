@@ -9,6 +9,8 @@ class MoviesController < ApplicationController
   # GET /movies/1
   def show
     set_movie
+    @available_vhs = @movie.movie_items.where(in_store: true, item_type: "VHS")
+    @available_dvd = @movie.movie_items.where(in_store: true, item_type: "DVD")
   end
 
   # GET /movies/new
@@ -25,6 +27,11 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
+      actor_list = movie_params[:actor_list];
+      byebug
+      actor_list.each do |a| 
+        ActorMovie.create!(movie_id: @movie.id, actor_id: a.id)
+      end
       flash.now[:success] = "Movie was successfully created"
       redirect_to @movie
     else
@@ -57,6 +64,6 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:name, :genre_id, :release_date, :minutes, :description)
+      params.require(:movie).permit(:name, :genre_id, :release_date, :minutes, :description, :actor_list)
     end
 end

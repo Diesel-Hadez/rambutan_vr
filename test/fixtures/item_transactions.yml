@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  borrow_date: 2019-06-24 13:10:15
+  return_date: 2019-06-24 13:10:15
+  user_id: 1
+  movie_item_id: 1
+
+two:
+  borrow_date: 2019-06-24 13:10:15
+  return_date: 2019-06-24 13:10:15
+  user_id: 1
+  movie_item_id: 1

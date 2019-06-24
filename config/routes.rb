@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
-#  get 'sessions/new'
-#  get 'users/edit'
-#  get 'users/new'
-#  get 'users/index'
-#  get 'users/show'
+  resources :item_transactions
+  resources :actor_movies
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
   get '/login', to: 'sessions#new'

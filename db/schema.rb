@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_21_095632) do
+ActiveRecord::Schema.define(version: 2019_06_24_051015) do
+
+  create_table "actor_movies", force: :cascade do |t|
+    t.integer "actor_id"
+    t.integer "movie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_id"], name: "index_actor_movies_on_actor_id"
+    t.index ["movie_id"], name: "index_actor_movies_on_movie_id"
+  end
 
   create_table "actors", force: :cascade do |t|
     t.string "name"
@@ -24,12 +33,22 @@ ActiveRecord::Schema.define(version: 2019_06_21_095632) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "item_transactions", force: :cascade do |t|
+    t.datetime "borrow_date"
+    t.datetime "return_date"
+    t.integer "user_id"
+    t.integer "movie_item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "movie_items", force: :cascade do |t|
-    t.string "type"
+    t.string "item_type"
     t.boolean "in_store", default: true
     t.date "borrow_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "movie_id"
   end
 
   create_table "movies", force: :cascade do |t|
