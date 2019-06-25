@@ -1,5 +1,7 @@
-<h1>New Actor Movie</h1>
-
+<% provide(:title, "Add Actor to Movie") %>
+<% provide(:submit_text, "Add Actor to Movie") %>
+<% provide(:submit_url, actor_movies_path(@actor_movie)) %>
+<% provide(:form_title, "Add Actor to Movie") %>
 <%= render 'form', actor_movie: @actor_movie %>
 
 <%= link_to 'Back', actor_movies_path %>

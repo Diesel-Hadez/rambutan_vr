@@ -1,7 +1,8 @@
-<%= form_with(model: movie_item, local: true) do |form| %>
+<%= javascript_include_tag "custom" %>
+<%= form_for(@movie_item, url: yield(:submit_url), :html => {class: "mb-4"}) do |form| %>
   <% if movie_item.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(movie_item.errors.count, "error") %> prohibited this movie_item from being saved:</h2>
+      <h2><%= pluralize(movie_item.errors.count, "error") %> prohibited this movie from being saved:</h2>
 
       <ul>
       <% movie_item.errors.full_messages.each do |message| %>
@@ -10,8 +11,17 @@
       </ul>
     </div>
   <% end %>
+  <h1 class="text-center"><%= yield(:form_title) %></h1>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <div class="form-group">
+    <%= form.label :item_type, class: 'form-text' %>
+    <%= form.text_field :item_type, class: 'form-control', placeholder: "VHS/DVD" %>
+    </div>
+
+    <div class="form-group", class: 'form-text'>
+    <%= form.label :movie_id%>
+    <%= form.select(:movie_id, options_from_collection_for_select( Movie.all, :id, :name), { include_blank: "Select Movie" }, { class: "form-control mb-4" }) %>
+    </div>
+
+    <%= form.submit yield(:submit_text), class: "btn btn-lg btn-block btn-primary"%>
 <% end %>

@@ -24,18 +24,25 @@ class ItemTransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    @transaction = ItemTransaction.new(transaction_params)
     temp = transaction_params
-    temp[:user_id] = current_user
-    byebug
-
-    respond_to do |format|
-      if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
-      else
-        format.html { render :new }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+    temp[:user_id] = current_user.id
+    temp[:borrow_date] = DateTime.now
+    
+    to_borrow = MovieItem.find_by(id: temp[:movie_item_id])
+    if to_borrow.nil?
+      format.json { render json: {message: "Invalid Movie Item ID!"}, status: :unprocessable_entity }
+    elsif !to_borrow.in_store? 
+      format.json { render json: {message: "Movie Item is unavailable!"}, status: :unprocessable_entity }
+    else
+      @transaction = ItemTransaction.new(temp)
+      respond_to do |format|
+        if @transaction.save
+          format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+          format.json { render :show, status: :created, location: @transaction }
+        else
+          format.html { render :new }
+          format.json { render json: @transaction.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -45,9 +52,9 @@ class ItemTransactionsController < ApplicationController
   def update
     respond_to do |format|
       temp = transaction_params
-      temp[:user_id] = current_user
-      byebug
-      if @transaction.update(transaction_params)
+      temp[:user_id] = current_user.id
+      temp[:return_date] = DateTime.now
+      if @transaction.update(temp)
         format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
         format.json { render :show, status: :ok, location: @transaction }
       else
@@ -75,6 +82,6 @@ class ItemTransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:item_transaction).permit(:movie_item_id)
+      params.require(:item_transaction).permit(:movie_id)
     end
 end

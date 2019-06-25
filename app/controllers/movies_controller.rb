@@ -27,11 +27,10 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
-      actor_list = movie_params[:actor_list];
-      byebug
-      actor_list.each do |a| 
-        ActorMovie.create!(movie_id: @movie.id, actor_id: a.id)
-      end
+      #actor_list = movie_params[:actor_list];
+      #actor_list.each do |a| 
+      #  ActorMovie.create!(movie_id: @movie.id, actor_id: a.id)
+      #end
       flash.now[:success] = "Movie was successfully created"
       redirect_to @movie
     else

@@ -69,6 +69,6 @@ class ActorMoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def actor_movie_params
-      params.fetch(:actor_movie, {})
+      params.require(:actor_movie).permit(:movie_id, :actor_id)
     end
 end

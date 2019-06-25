@@ -1,5 +1,12 @@
 <% provide(:title, "Edit Profile") %>
-<% provide(:submit_url, user_path(@user)) %>
+<% provide(:submit_url, signup_path(@user)) %>
+<% provide(:form_title, "Edit Profile") %>
 <% provide(:submit_text, "Save changes") %>
-<h1>Edit Profile</h1>
-<%= render 'form' %>
+<%= stylesheet_link_tag "users" %>
+<div class="row">
+  <%= render 'profilesidebar' %>
+  <nav class="col-md-9 ml-sm-auto col-lg-10 px-4 profile-container" role="main">
+    <%= render 'form' %>
+  </nav>
+
+</div>

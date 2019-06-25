@@ -1,6 +1,15 @@
-<div class="container">
-  <h1 class="text-center"> <%= yield(:form_title)%> </h1>
-<%= form_for(@user, url: yield(:submit_url)) do |f| %>
+<%= form_for(@user, url: yield(:submit_url), :html => {class: "mb-4"}) do |f| %>
+ <% if @user.errors.any? %>
+   <div id="error_explanation">
+      <p>The form contains <%= pluralize(@user.errors.count, "error") %> </p>
+      <ul>
+        <% @user.errors.full_messages.each do |e| %>
+          <li><%= e %> </li>
+        <% end %>
+      </ul>
+   </div>
+<% end %>
+ <h1 class="text-center"> <%= yield(:form_title)%> </h1>
   <div class="form-group">
   <%= f.label :name, class: 'form-text' %>
   <%= f.text_field :name, class: 'form-control' %>
@@ -40,4 +49,3 @@
   <%= f.submit yield(:submit_text) , class: "btn btn-lg btn-block btn-primary" %>
 
 <% end %>
-</div>

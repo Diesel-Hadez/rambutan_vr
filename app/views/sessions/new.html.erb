@@ -1,5 +1,4 @@
 <% provide(:title, "Sign in") %>
-<div class="container">
 <%= form_for(:session, url: login_path) do |f| %>
 <h1 class="text-center">Log In</h1>
   <div class="form-group">
@@ -16,6 +15,6 @@
   <span>Remember me on this device</span>
   </div>
   <% end %>
-  <%= f.submit "Log in", class: "btn btn-lg btn-block btn-primary" %>
+  <%= f.submit "Log in", class: "btn btn-lg btn-block btn-primary mb-4" %>
+  <%= link_to "Create an Account", signup_path, class: "btn btn-lg btn-block btn-primary mb-4" %>
 <% end %>
-</div>

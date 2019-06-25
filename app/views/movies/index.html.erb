@@ -1,16 +1,35 @@
 <p id="notice"><%= notice %></p>
 
 <h1 class="text-center" >Movies</h1>
-<div class="card" style="width: 18rem;">
-  <%= image_tag "ugly_dvd.svg", class: "card-img-top", alt: "DVD Image" %>
+<% if is_admin? %>
+  <div class="container">
+    <%= link_to 'New Movie', new_movie_path, style: "max-width: 48rem; margin: auto;", class: "btn btn-lg btn-block mb-3 btn-primary" %>
+  </div>
+<% end %>
+
+<% @movies.each do |movie| %>
+
+<div class="card mb-3 movie" style="max-width: 48rem;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <%= image_tag "ugly_dvd.svg", class: "card-img-top", alt: "DVD Image" %>
+    </div>
+    <div class="col-md-8">
     <div class="card-body">
-    <h5 class="card-title">ActionDVD: The Movie</h5>
-    <p class="card-text">An action-packed blockbuster- exclusively released for DVD.</p>
+      <h5 class="card-title"><%= movie.name %></h5>
+      <p class="card-text"><%= movie.description %></p>
     </div>
     <div class="card-body">
-      <a href="#" class="card-link">View Movie</a>
+      <%= link_to "View Movie", movie, class: "card-link" %>
+      <% if is_admin? %>
+        <%= link_to "Edit Movie", edit_movie_path(movie), class: "card-link" %>
+        <%= link_to "Delete Movie", movie, method: :delete, data: { confirm: "Are you sure? This will delete all VHS/DVDs too!" } , class: "card-link" %>
+      <% end %>
     </div>
+    </div>
+  </div>
 </div>
+<% end %>
 
 <table>
   <thead>

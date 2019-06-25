@@ -1,5 +1,8 @@
+<% if !content_for?(:hide_footer) %>
 <footer>
   <small>
     Rambutan VR (C) 2019.
   </small>
+  <%= debug(params) if Rails.env.development? %>
 </footer>
+<% end %>

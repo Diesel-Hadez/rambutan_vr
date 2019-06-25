@@ -1,5 +1,5 @@
 <%= javascript_include_tag "custom" %>
-<%= form_with(model: movie, local: true) do |form| %>
+<%= form_for(@movie, url: yield(:submit_url), :html => {class: "mb-4"}) do |form| %>
   <% if movie.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
@@ -11,30 +11,34 @@
       </ul>
     </div>
   <% end %>
+  <h1 class="text-center"><%= yield(:form_title) %></h1>
 
-  <div class="actions">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <div class="form-group">
+    <%= form.label :name, class: 'form-text' %>
+    <%= form.text_field :name, class: 'form-control' %>
+    </div>
 
-    <%= form.label :genre_id%>
+    <div class="form-group", class: 'form-text'>
+    <%= form.label :genre_id %>
     <%= form.collection_select(:genre_id, Genre.all, :id, :name) %>
+    </div>
 
-    <%= form.label :release_date %>
-    <%= form.date_select :release_date %>
+    <div class="form-group">
+    <%= form.label :release_date, class: 'form-text' %>
+    <%= form.date_select :release_date, class: 'form-control' %>
+    </div>
 
-    <%= form.label :minutes %>
-    <%= form.text_field :minutes %>
+    <div class="form-group">
+    <%= form.label :minutes, class: 'form-text' %>
+    <%= form.text_field :minutes, class: 'form-control' %>
+    </div>
 
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+    <div class="form-group">
+    <%= form.label :description, class: 'form-text' %>
+    <%= form.text_area :description, class: 'form-control' %>
+    </div>
 
-    <%= form.submit %>
-  </div>
+    <%= link_to "Add Actors", new_actor_movie_path, class: "btn btn-lg btn-block btn-primary" %>
+
+    <%= form.submit yield(:submit_text), class: "btn btn-lg btn-block btn-primary"%>
 <% end %>
-
-
-<%= label_tag :add_actor %>
-<% select_list = options_from_collection_for_select(Actor.all, :id, :name) %>
-<% actor_list = content_tag(:select, select_list )%>
-<%= content_tag(:div, actor_list , id: "actor_list") %>
-
