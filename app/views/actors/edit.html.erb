@@ -1,0 +1,9 @@
+<% provide(:title, "Edit Actor") %>
+<% provide(:submit_text, "Submit Changes") %>
+<% provide(:form_title, "Edit Actor") %>
+<% provide(:submit_url, actors_path(@actor)) %>
+
+<%= render 'form', actor: @actor %>
+
+<%= link_to 'Show', @actor %> |
+<%= link_to 'Back', actors_path %>

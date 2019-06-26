@@ -1,6 +1,6 @@
-<h1>Edit Movie</h1>
-<% provide(:title, "Edit Movie") %>
 <% provide(:submit_text, "Submit changes") %>
+<% provide(:title, "Edit Movie") %>
+<% provide(:form_title, "Edit Movie") %>
 <% provide(:submit_url, movie_path(@movie)) %>
 
 <%= render 'form', movie: @movie %>

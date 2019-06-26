@@ -35,6 +35,10 @@ module SessionsHelper
     current_user && current_user.admin?
   end
 
+  def is_suspended?
+    current_user && current_user.suspended?
+  end
+
   def log_out
     forget current_user
     session.delete(:user_id)

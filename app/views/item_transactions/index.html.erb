@@ -1,25 +1,49 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Transactions</h1>
+<h1 class="text-center">Transactions</h1>
+<% if is_admin? %>
+  <div class="container">
+    <%= link_to "New Transaction", new_item_transaction_path, style: "max-width: 48rem; margin: auto;", class: "btn btn-lg btn-block mb-3 btn-primary" %>
+    <%= link_to "View Pending only", (item_transactions_path + "?filter=pending") , style: "max-width: 48rem; margin: auto;", class: "btn btn-lg btn-block mb-3 btn-primary" %>
+  </div>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @transactions.each do |transaction| %>
-      <tr>
-        <td><%= link_to 'Show', transaction %></td>
-        <td><%= link_to 'Edit', edit_item_transaction_path(transaction) %></td>
-        <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<% @transactions.each do |transaction|%>
+  <% movie_item = MovieItem.find_by(id: transaction.movie_item_id) %>
+  <% movie = Movie.find_by(id: movie_item.movie_id) %>
+  <% user = User.find_by(id: transaction.user_id) %>
+  <div class="card mb-3 movie" style="max-width: 48rem;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+      <% if movie_item.item_type == "VHS" %>
+      <%= image_tag "ugly_vhs.svg", class: "card-img-top", alt: "DVD Image" %>
+      <% elsif movie_item.item_type == "DVD" %>
+      <%= image_tag "ugly_dvd.svg", class: "card-img-top", alt: "DVD Image" %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Transaction', new_item_transaction_path %>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= transaction.borrow_date %></h5>
+          <p class="card-text">
+            <ul>
+              <% if is_admin? %>
+                <li><%= link_to user.name, user %></li>
+              <% end %>
+              <li>Type: <%= movie_item.item_type %>
+              <li>Movie: <%= movie.name %> </li>
+              <% if transaction.return_date.nil? %>
+                <li>Due before <%= transaction.borrow_date + 2.weeks %></li>
+                <% days_between = (Date.today.mjd-transaction.borrow_date.to_date.mjd) %>
+                <% if days_between > 14%>
+                  <li>Fees: $<%= days_between %></li>
+                <% end %>
+              <% else %>
+                <li>Returned on <%= transaction.return_date %></li>
+              <% end %>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,40 +1,21 @@
 <%= javascript_include_tag "custom" %>
-<%= form_with(model: movie, local: true) do |form| %>
-  <% if movie.errors.any? %>
+<%= form_for(@actor, url: yield(:submit_url), :html => {class: "mb-4"}) do |form| %>
+  <% if actor.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+      <h2><%= pluralize(actor.errors.count, "error") %> prohibited this movie from being saved:</h2>
 
       <ul>
-      <% movie.errors.full_messages.each do |message| %>
+      <% actor.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-
-    <%= form.label :genre_id%>
-    <%= form.collection_select(:genre_id, Genre.all, :id, :name) %>
-
-    <%= form.label :release_date %>
-    <%= form.date_select :release_date %>
-
-    <%= form.label :minutes %>
-    <%= form.text_field :minutes %>
-
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-
-    <%= form.submit %>
+  <h1 class="text-center"><%= yield(:form_title) %> </h1>
+  <div class="form-group">
+    <%= form.label :name, class: 'form-text' %>
+    <%= form.text_field :name, class: 'form-control' %>
   </div>
+  <%= form.submit yield(:submit_text), class: "btn btn-lg btn-block btn-primary" %>
 <% end %>
-
-
-<%= label_tag :add_actor %>
-<% select_list = options_from_collection_for_select(Actor.all, :id, :name) %>
-<% actor_list = content_tag(:select, select_list )%>
-<%= content_tag(:div, actor_list , id: "actor_list") %>
-

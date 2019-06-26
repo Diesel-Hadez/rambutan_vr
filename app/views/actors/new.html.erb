@@ -1,0 +1,8 @@
+<% provide(:title, "Add Actor") %>
+<% provide(:submit_text, "Add Actor") %>
+<% provide(:form_title, "New Actor") %>
+<% provide(:submit_url, actors_path(@actor)) %>
+
+<%= render 'form', actor: @actor %>
+
+<%= link_to 'Back', actors_path %>

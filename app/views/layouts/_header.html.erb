@@ -13,6 +13,7 @@
           <li class="nav-item"><%= link_to "Actors", actors_path, class: "nav-link" %></li>
         <% if logged_in? %>
           <li class="nav-item"><%= link_to "Profile", current_user, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Transactions", item_transactions_path, class: "nav-link" %></li>
         <% end %>
       </ul>    
       <ul class="navbar-nav ml-auto">

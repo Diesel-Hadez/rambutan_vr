@@ -16,7 +16,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="ugly_dvd.svg">
+   sodipodi:docname="ugly_dvd_vhs.svg">
   <defs
      id="defs2">
     <linearGradient
@@ -44,7 +44,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="-44.416897"
+     inkscape:cx="313.85031"
      inkscape:cy="265.2395"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -62,7 +62,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -79,24 +79,28 @@
        height="171.58702"
        x="5.1748352"
        y="51.882072" />
-    <circle
-       id="path3715"
-       cx="105"
-       cy="148.5"
-       style="fill:#aeaeae;fill-opacity:1;stroke:#143642;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       r="56.661137" />
-    <circle
-       id="circle6235"
-       cx="105"
-       cy="148.5"
-       style="fill:#143642;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       r="21.104063" />
-    <circle
-       r="12.917879"
-       style="fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       cy="148.5"
-       cx="105"
-       id="circle6174" />
+    <g
+       id="g849"
+       transform="matrix(0.62777839,0,0,0.62777839,-3.250083,55.274909)">
+      <circle
+         r="56.661137"
+         style="fill:#aeaeae;fill-opacity:1;stroke:#143642;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         cy="148.5"
+         cx="105"
+         id="path3715" />
+      <circle
+         r="21.104063"
+         style="fill:#143642;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         cy="148.5"
+         cx="105"
+         id="circle6235" />
+      <circle
+         id="circle6174"
+         cx="105"
+         cy="148.5"
+         style="fill:#e8e8e8;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         r="12.917879" />
+    </g>
     <rect
        style="fill:#dbe8d6;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect6411"
@@ -118,5 +122,37 @@
            y="194.1895"
            style="font-size:146.66667175px;line-height:1.25;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle" /></flowRegion><flowPara
          id="flowPara6451"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:146.66667175px;line-height:1.25;font-family:Helvetika;-inkscape-font-specification:Helvetika;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle">DVD</flowPara></flowRoot>  </g>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:146.66667175px;line-height:1.25;font-family:Helvetika;-inkscape-font-specification:Helvetika;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle">DVD</flowPara></flowRoot>    <g
+       id="g844"
+       transform="matrix(0.66634729,0,0,0.66634729,-9.7788495,37.213302)">
+      <rect
+         y="133.66115"
+         x="178.09822"
+         height="71.093697"
+         width="131.49661"
+         id="rect6510"
+         style="fill:#807672;fill-opacity:1;stroke:#691616;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <ellipse
+         ry="11.581679"
+         rx="13.898015"
+         cy="168.45325"
+         cx="272.70087"
+         id="path7059"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.24919188;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <ellipse
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.24919188;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="ellipse7076"
+         cx="215.02179"
+         cy="168.45325"
+         rx="13.898015"
+         ry="11.581679" />
+      <rect
+         y="156.81174"
+         x="216.05049"
+         height="24.321527"
+         width="55.59206"
+         id="rect7057"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+  </g>
 </svg>

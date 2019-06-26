@@ -1,7 +1,45 @@
+<%= javascript_include_tag "custom" %>
 <p id="notice"><%= notice %></p>
 
-<p><%= pluralize(@available_vhs.count,'VHS')%> available</p>
-<p><%= pluralize(@available_dvd.count,'DVD')%> available</p>
+<% dvd_count = @available_dvd.count %>
+<% vhs_count = @available_vhs.count %>
+<% genre     = Genre.find_by(id: @movie.genre_id) %>
 
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+<div class="card mb-3 movie" style="max-width: 48rem;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <% if vhs_count > 0 && dvd_count > 0 %>
+        <%= image_tag "ugly_dvd_vhs.svg", class: "card-img-top", alt: "VHS/DVD Image" %>
+      <% elsif vhs_count > 0 %>
+        <%= image_tag "ugly_vhs.svg", class: "card-img-top", alt: "VHS Image" %>
+        
+      <% elsif dvd_count > 0 %>
+        <%= image_tag "ugly_dvd.svg", class: "card-img-top", alt: "DVD Image" %>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"> <%= @movie.name %> </h5>
+        <p class="card-text"> <%= @movie.description %> </h5>
+        <p class="card-text">Genre: <%= genre.name %> </h5>
+        <p class="card-text"><%= pluralize((vhs_count  == 0) ? 0 : vhs_count,'VHS')%> available</p>
+        <p class="card-text"><%= pluralize((dvd_count == 0) ? 0 : dvd_count,'DVD')%> available</p>
+        <h5 class="card-title">Cast</h5>
+        <ol>
+          <% @movie.actors.each do |actor| %>
+            <li class="card-text"><%= link_to actor.name, actor %></li>
+          <% end %>
+        </ol>
+        <% if logged_in? %>
+          <% if vhs_count > 0 %>
+            <span class="btn btn-primary" onclick="Borrow('VHS', <%= @available_vhs.first.id %>)">Borrow VHS</span>
+          <% end %>
+
+          <% if dvd_count > 0 %>
+            <span class="btn btn-primary" onclick="Borrow('DVD', <%= @available_dvd.first.id %>)">Borrow DVD</span>
+          <% end %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>

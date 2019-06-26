@@ -5,9 +5,14 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
-      log_in user
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user
+      if user.suspended?
+        flash.now[:danger] = "This user has been suspended! Please call/email support to unsuspend your account."
+        render 'new'
+      else
+        log_in user
+        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+        redirect_to user
+      end
     else
       flash.now[:danger] = "Invalid combination!"
       render 'new'
