@@ -1,5 +1,11 @@
 {
   "name": "rambutan_vr",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "version": "1.0.0",
+  "description": "Version 1",
+  "main": "index.js",
+  "repository": "https://github.com/Diesel-Hadez/rambutan_vr.git",
+  "author": "Diesel-Hadez <Diesel-Hadez@users.noreply.github.com>",
+  "license": "None"
 }
