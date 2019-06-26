@@ -21,6 +21,8 @@
     <div class="form-group", class: 'form-text'>
     <%= form.label :movie_id%>
     <%= form.select(:movie_id, options_from_collection_for_select( Movie.all, :id, :name), { include_blank: "Select Movie" }, { class: "form-control mb-4" }) %>
+    <%= form.label :num %>
+    <%= form.number_field :num, class: 'form-control', value: '1' %>
     </div>
 
     <%= form.submit yield(:submit_text), class: "btn btn-lg btn-block btn-primary"%>

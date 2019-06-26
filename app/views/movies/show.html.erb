@@ -27,17 +27,27 @@
         <h5 class="card-title">Cast</h5>
         <ol>
           <% @movie.actors.each do |actor| %>
-            <li class="card-text"><%= link_to actor.name, actor %></li>
+            <% actor_movie = ActorMovie.find_by(actor_id: actor.id, movie_id: @movie.id) %>
+            <li class="card-text"><%= link_to actor.name, actor %> <span onclick="RemoveActor(<%= actor_movie.id %>)">(Remove)</span></li>
           <% end %>
         </ol>
         <% if logged_in? %>
           <% if vhs_count > 0 %>
-            <span class="btn btn-primary" onclick="Borrow('VHS', <%= @available_vhs.first.id %>)">Borrow VHS</span>
+            <span class="mb-3 btn btn-primary" onclick="Borrow('VHS', <%= @available_vhs.first.id %>)">Borrow VHS</span>
           <% end %>
 
           <% if dvd_count > 0 %>
-            <span class="btn btn-primary" onclick="Borrow('DVD', <%= @available_dvd.first.id %>)">Borrow DVD</span>
+            <span class="mb-3 btn btn-primary" onclick="Borrow('DVD', <%= @available_dvd.first.id %>)">Borrow DVD</span>
           <% end %>
+
+          <% if is_admin? %>
+            <select id="actor_id" class='mb-3 form-control'>
+            <%= options_from_collection_for_select(Actor.all, :id, :name) %>
+            </select>
+            <span class="btn btn-primary mb-3" onclick="AddActor(<%= @movie.id %>)">Add Actor</span>
+            
+          <% end %>
+
       <% end %>
       </div>
     </div>

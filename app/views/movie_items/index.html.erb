@@ -2,6 +2,12 @@
 
 <h1 class="text-center" >Movies</h1>
 
+<% if is_admin? %>
+  <div class="container">
+    <%= link_to "New Item",new_movie_item_path , style: "max-width: 48rem; margin: auto;", class: "btn btn-lg btn-block mb-3 btn-primary" %>
+  </div>
+<% end %>
+
 <% @movie_items.each do |movie| %>
 
 <div class="card mb-3 movie" style="max-width: 48rem;">
@@ -14,9 +20,10 @@
       <h5 class="card-title"><%= movie.item_type %></h5>
       <p class="card-text"><%= Movie.find_by( id: movie.movie_id ).name %></p>
       <p class="card-text">In-store: <%= movie.in_store %></p>
+      <p class="card-text">Shelf: <%= movie.to_shelf %></p>
     </div>
     <div class="card-body">
-      <%= link_to "View Movie", movie, class: "card-link" %>
+      <%= link_to "View Item", movie, class: "card-link" %>
       <% if is_admin? %>
         <%= link_to "Edit Item", edit_movie_item_path(movie), class: "card-link" %>
         <%= link_to "Delete Item", movie, method: :delete, data: { confirm: "Are you sure?" }, class: "card-link" %>
@@ -26,5 +33,3 @@
   </div>
 </div>
 <% end %>
-
-<%= link_to 'New Movie', new_movie_item_path %>

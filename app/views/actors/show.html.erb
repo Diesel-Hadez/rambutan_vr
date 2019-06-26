@@ -1,4 +1,24 @@
 <p id="notice"><%= notice %></p>
+
+<div class="card mb-3 movie" style="max-width: 48rem;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <%= image_tag "ugly_person.svg", class: "card-img-top", alt: "DVD Image" %>
+    </div>
+    <div class="col-md-8">
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to @actor.name, actor_path(@actor) %></h5>
+      <p class="card-text"><ol>
+        <% @actor.movies.each do |movie| %>
+          <li>  <%= link_to movie.name, movie_path(movie) %> </li>
+        <% end %>
+      </ol></p>
+    </div>
+    </div>
+  </div>
+</div>
+
+
 <p><%= @actor.name %></p>
 
 <%= link_to 'Edit', edit_actor_path(@actor) %> |

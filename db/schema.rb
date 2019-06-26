@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_24_051015) do
+ActiveRecord::Schema.define(version: 2019_06_26_040651) do
 
   create_table "actor_movies", force: :cascade do |t|
     t.integer "actor_id"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 2019_06_24_051015) do
     t.integer "movie_item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "return_token"
+    t.string "pickup_token"
   end
 
   create_table "movie_items", force: :cascade do |t|

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :admin_user, only: [:index, :destroy]
   def new
     @user = User.new
   end
@@ -33,9 +34,19 @@ class UsersController < ApplicationController
       redirect_to root_url
     end
   end
+
+  def destroy
+    @user = Movie.find(params[:id])
+    @user.destroy
+    redirect_to root_url, notice: "User was successfully destroyed"
+  end
   
   private
     def user_params
       params.require(:user).permit(:name, :dob, :address, :email, :phone_number, :password, :password_confirmation)
+    end
+
+    def admin_user
+      redirect_to root_url unless is_admin?
     end
 end

@@ -6,12 +6,16 @@ class ItemTransactionsController < ApplicationController
   def index
     if is_admin?
       if params[:filter] == 'pending'
-        @transactions = ItemTransaction.where(return_date: nil)
+        @transactions = ItemTransaction.where(return_date: nil).order("borrow_date DESC")
       else
-        @transactions = ItemTransaction.all
+        @transactions = ItemTransaction.all.order("borrow_date DESC")
       end
     else
-      @transactions = ItemTransaction.where(user_id: current_user.id)
+      if params[:filter] == 'pending'
+        @transactions = ItemTransaction.where(user_id: current_user.id, return_date: nil).order("borrow_date DESC")
+      else
+        @transactions = ItemTransaction.where(user_id: current_user.id).order("borrow_date DESC")
+      end
     end
   end
 
@@ -69,14 +73,35 @@ class ItemTransactionsController < ApplicationController
   def update
     respond_to do |format|
       temp = transaction_params
-      temp[:user_id] = current_user.id
       temp[:return_date] = DateTime.now
-      if @transaction.update(temp)
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
-        format.json { render :show, status: :ok, location: @transaction }
+      if temp[:return_token] == @transaction.return_token
+        movie_item = MovieItem.find_by(id: @transaction.movie_item_id)
+        if movie_item.nil?
+          format.html { render :edit }
+          format.json { render json: {message: "Invalid Movie Item ID!"}, status: :unprocessable_entity }
+        else
+          if movie_item.in_store?
+              format.html { render :edit }
+              format.json { render json: {message: "Item has already been returned!" }, status: :unprocessable_entity}
+          else
+            if !movie_item.update_attribute(:in_store, true)
+              format.html { render :edit }
+              format.json { render json: movie_item.errors, status: :unprocessable_entity}
+            end
+            temp[:return_date] = DateTime.now
+            if @transaction.update(temp)
+              format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
+              #format.json { render :show, status: :ok, location: @transaction }
+              format.json { render json: {message: "Successfully returned item!"}}
+            else
+              format.html { render :edit }
+              format.json { render json: @transaction.errors, status: :unprocessable_entity }
+            end
+          end
+        end
       else
+        format.json { render json: {message: "Invalid token!"}, status: :unprocessable_entity }
         format.html { render :edit }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -99,6 +124,6 @@ class ItemTransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:item_transaction).permit(:movie_item_id)
+      params.require(:item_transaction).permit(:movie_item_id, :return_token)
     end
 end

@@ -1,12 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1 class="text-center">Transactions</h1>
-<% if is_admin? %>
-  <div class="container">
-    <%= link_to "New Transaction", new_item_transaction_path, style: "max-width: 48rem; margin: auto;", class: "btn btn-lg btn-block mb-3 btn-primary" %>
-    <%= link_to "View Pending only", (item_transactions_path + "?filter=pending") , style: "max-width: 48rem; margin: auto;", class: "btn btn-lg btn-block mb-3 btn-primary" %>
-  </div>
-<% end %>
+<div class="container">
+  <%= link_to "View Pending only", (item_transactions_path + "?filter=pending") , style: "max-width: 48rem; margin: auto;", class: "btn btn-lg btn-block mb-3 btn-primary" %>
+</div>
 
 <% @transactions.each do |transaction|%>
   <% movie_item = MovieItem.find_by(id: transaction.movie_item_id) %>
@@ -28,7 +25,9 @@
             <ul>
               <% if is_admin? %>
                 <li><%= link_to user.name, user %></li>
+                <li>Return token: <%= transaction.return_token %></li>
               <% end %>
+              <li>Pickup token: <%= transaction.pickup_token %></li>
               <li>Type: <%= movie_item.item_type %>
               <li>Movie: <%= movie.name %> </li>
               <% if transaction.return_date.nil? %>

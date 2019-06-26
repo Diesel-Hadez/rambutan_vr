@@ -1,5 +1,6 @@
 class ActorMoviesController < ApplicationController
   before_action :set_actor_movie, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user, only: [ :edit ]
 
   # GET /actor_movies
   # GET /actor_movies.json
@@ -25,14 +26,18 @@ class ActorMoviesController < ApplicationController
   # POST /actor_movies.json
   def create
     @actor_movie = ActorMovie.new(actor_movie_params)
-
     respond_to do |format|
-      if @actor_movie.save
-        format.html { redirect_to @actor_movie, notice: 'Actor movie was successfully created.' }
-        format.json { render :show, status: :created, location: @actor_movie }
+      if !ActorMovie.find_by(movie_id: actor_movie_params[:movie_id], actor_id: actor_movie_params[:actor_id]).nil?
+          format.html { render :new }
+          format.json { render json: {message: "Actor is already registered in movie!"}, status: :unprocessable_entity }
       else
-        format.html { render :new }
-        format.json { render json: @actor_movie.errors, status: :unprocessable_entity }
+        if @actor_movie.save
+          format.html { redirect_to @actor_movie, notice: 'Actor movie was successfully created.' }
+          format.json { render :show, status: :created, location: @actor_movie }
+        else
+          format.html { render :new }
+          format.json { render json: @actor_movie.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -70,5 +75,9 @@ class ActorMoviesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def actor_movie_params
       params.require(:actor_movie).permit(:movie_id, :actor_id)
+    end
+
+    def admin_user
+      redirect_to root_url unless is_admin?
     end
 end

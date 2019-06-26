@@ -21,3 +21,18 @@ function Borrow(item_type, arg_movie_item_id) {
     {movie_item_id: arg_movie_item_id , authenticity_token: document.getElementsByName("csrf-token")[0].getAttribute("content")}
   ).then(data => alert(data.message)).catch(error => alert(error));
 }
+
+function AddActor(movie_id) {
+  let actor_id = document.getElementById("actor_id").value;
+   postData('/actor_movies.json',
+         {actor_id: actor_id, movie_id: movie_id , authenticity_token: document.getElementsByName("csrf-token")[0].getAttribute("content")},'POST'
+       ).then(data => {if (data.message !== undefined) {alert(data.message);}}).catch(error => alert(error));
+
+}
+
+function RemoveActor(actor_movie_id) {
+   postData('/actor_movies/' + actor_movie_id  +'.json',
+         {authenticity_token: document.getElementsByName("csrf-token")[0].getAttribute("content")},'DELETE'
+       ).then(data => {
+       }).catch(error => {});
+}
